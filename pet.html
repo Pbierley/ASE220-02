@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-    <a href="PetShelter.html" class="btn btn-primary mt-3">Back to Home</a>
+    <a href="index.html" class="btn btn-primary mt-3">Back to Home</a>
 <div class="container pet-detail">
     <h1 id="pet-name">Pet Name</h1>
     <img id="pet-image" src="" alt="Pet">
@@ -36,7 +36,12 @@
 </div>
 
 <script>
+    
     const params = new URLSearchParams(window.location.search);
+    //Added feature to limit users from visiting a pet page without there being pet information to view 
+    if(!params.get("name"))
+    window.location.href = "index.html"
+
     document.getElementById("pet-name").textContent = params.get("name");
     document.getElementById("pet-type").textContent = params.get("type");
     document.getElementById("pet-breed").textContent = params.get("breed");
