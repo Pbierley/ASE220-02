@@ -1,0 +1,27 @@
+
+### HTML ENDPOINT: Your index page
+GET http://127.0.0.1:3000
+
+
+### HTML API DOCUMENTATION: This can be a different page
+GET http://127.0.0.1:3000/detail
+
+
+### API ENDPOINTS
+### Create a document
+POST http://127.0.0.1:3000/api
+Content-type: application/json
+
+{"newPetExample": "scruffles"}
+
+### Retrieve a document
+GET http://127.0.0.1:3000/api/20250403T143342583Z
+
+### Modify the content of the document
+PUT http://127.0.0.1:3000/api/pets
+Content-type: application/json
+
+{"change":"the content"}
+
+### Delete the content of the document
+DELETE http://127.0.0.1:3000/api/20250403T143342583Z
