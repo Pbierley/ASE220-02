@@ -15,7 +15,8 @@ Content-type: application/json
 {"newPetExample": "scruffles"}
 
 ### Retrieve a document
-GET http://127.0.0.1:3000/api/20250403T143342583Z
+GET http://127.0.0.1:3000/api/pets
+Content-type: application/json
 
 ### Modify the content of the document
 PUT http://127.0.0.1:3000/api/pets
