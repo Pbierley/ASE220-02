@@ -38,7 +38,7 @@
         background-color: #6c757d;
         color: white;
         border: none;
-        border-radius: 5px;
+        border-radius: 10px;
         cursor: pointer;
       }
       .modal-male-bg {
@@ -47,13 +47,16 @@
       }
       .modal-female-bg {
         background-color: #ff69b4 !important;
-        color: white !important;
+        /* color: white !important; */
+      }
+      .bg-female {
+        background-color: #ff69b4 !important;
       }
     </style>
   </head>
   <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-light bg-light shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="#">🐶 Pet Shelter</a>
         <button
@@ -68,6 +71,8 @@
     </nav>
 
     <h1 class="text-center my-4">Available Pets</h1>
+
+    <!-- Container used in the js -->
     <div class="container">
       <div id="pet-container" class="row g-4"></div>
     </div>
@@ -180,6 +185,7 @@
               style="max-width: 300px"
             />
             <ul class="list-unstyled">
+              <li><strong>Name:</strong> <span id="modalName"></span></li>
               <li><strong>Type:</strong> <span id="modalType"></span></li>
               <li><strong>Breed:</strong> <span id="modalBreed"></span></li>
               <li><strong>Sex:</strong> <span id="modalSex"></span></li>
@@ -202,11 +208,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+      // Constants
       let pets = [];
       let petsDisplayed = 0;
       const petsPerLoad = 9;
       const API_URL = "http://127.0.0.1:3000/api/pets";
-
+      //  function that pulls the data from node js
       async function fetchPets() {
         try {
           const response = await fetch(API_URL);
@@ -219,7 +226,7 @@
           console.error("Error fetching pets:", error);
         }
       }
-
+      //  function that builds the pet card with html from the data from json data
       function buildPetCard(startIndex) {
         let container = document.getElementById("pet-container");
 
@@ -229,11 +236,12 @@
           i++
         ) {
           let pet = pets[i];
-          let colorClass = pet.sex === "Male" ? "bg-primary" : "bg-danger";
+          let colorClass = pet.sex === "Male" ? "bg-primary" : "bg-female";
 
           let col = document.createElement("div");
           col.className = "col-12 col-md-4";
 
+          //  make change to this to make the color pink for females
           col.innerHTML = `
                     <div class="pet-card ${colorClass} text-white p-3" onclick="showPetDetails(${i})">
                         <img src="photos/${pet.name}.jpg" alt="${pet.name}" onerror="this.onerror=null; this.src='photos/NAN.jpg';">
@@ -248,7 +256,7 @@
 
           container.appendChild(col);
         }
-
+        //  check to make sure that it only allows users to click show more if theres actually more pets to view
         petsDisplayed += petsPerLoad;
         if (petsDisplayed >= pets.length) {
           document.getElementById("show-more-btn").style.display = "none";
@@ -271,6 +279,8 @@
           .catch(
             () => (document.getElementById("modalImage").src = "photos/Nan.jpg")
           );
+        //  sets all the data to display the pet view
+        document.getElementById("modalName").textContent = pet.name;
         document.getElementById("modalType").textContent = pet.type;
         document.getElementById("modalBreed").textContent = pet.breed;
         document.getElementById("modalSex").textContent = pet.sex;
@@ -281,7 +291,8 @@
           pet.description;
 
         const modalContent = document.querySelector("#petModal .modal-content");
-        modalContent.classList.remove("modal-male-bg", "modal-female-bg");
+        // modalContent.classList.remove("modal-male-bg", "modal-female-bg");
+        //  sets the color of the background according to gender
         modalContent.classList.add(
           pet.sex === "Male" ? "modal-male-bg" : "modal-female-bg"
         );
@@ -289,13 +300,9 @@
         let modal = new bootstrap.Modal(document.getElementById("petModal"));
         modal.show();
 
-        modal._element.addEventListener(
-          "hidden.bs.modal",
-          function () {
-            modalContent.classList.remove("modal-male-bg", "modal-female-bg");
-          },
-          { once: true }
-        );
+        modal._element.addEventListener("hidden.bs.modal", function () {
+          modalContent.classList.remove("modal-male-bg", "modal-female-bg");
+        });
       }
 
       document
