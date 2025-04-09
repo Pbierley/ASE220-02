@@ -80,16 +80,6 @@
     "description": "Shadow is a calm and gentle British Shorthair, perfect for cuddles."
   },
   {
-    "name": "Bella",
-    "type": "Dog",
-    "breed": "Labrador Retriever",
-    "sex": "Female",
-    "color": "Yellow",
-    "spayed": "Yes",
-    "age": 6,
-    "description": "Bella is a friendly, energetic, and loyal Labrador Retriever."
-  },
-  {
     "name": "Cleo",
     "type": "Cat",
     "breed": "Egyptian Mau",
@@ -200,13 +190,23 @@
     "description": "hes spoiled"
   },
   {
-    "name": "blue",
-    "type": "cat",
-    "breed": "no clue",
-    "sex": "Female",
-    "color": "grey",
+    "name": "bill",
+    "type": "bullfrog",
+    "breed": "alaskan",
+    "sex": "male",
+    "color": "Orange with white paws",
     "spayed": "Yes",
-    "age": 1,
-    "description": "She is actually the meanest cat I've ever owned"
+    "age": 67,
+    "description": "bill is a playful and affectionate bullfrog who enjoys being around people."
+  },
+  {
+    "name": "Raider",
+    "type": "Dog",
+    "breed": "Lab",
+    "sex": "Male",
+    "color": "Black",
+    "spayed": "Yes",
+    "age": 4,
+    "description": "Does not stop barking."
   }
 ]

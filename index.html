@@ -351,12 +351,13 @@
             const currentPets = await getResponse.json();
 
             // Ensure currentPets is an array (in case the API returns a single object initially)
+            //  FIX THIS
             const petsArray = Array.isArray(currentPets)
               ? currentPets
               : [currentPets];
 
             // Add the new pet to the array
-            petsArray.push(newPet);
+            //  petsArray.push(newPet);
 
             // Send the updated array back to the API
             const putResponse = await fetch(API_URL, {
@@ -364,7 +365,7 @@
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify(petsArray),
+              body: JSON.stringify(newPet),
             });
 
             if (putResponse.ok) {

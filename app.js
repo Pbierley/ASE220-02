@@ -12,10 +12,6 @@ app.get("/", (req, res) => {
   res.send(fs.readFileSync("./index.html", "utf8"));
 });
 
-app.get("/detail", (req, res) => {
-  res.send("HTML endpoint: detail");
-});
-
 /* API ENDPOINTS */
 //  creates a new file with timestamp as the file name
 app.post("/api", (req, res) => {
@@ -49,7 +45,7 @@ app.put("/api/:documentid", (req, res) => {
   res.json(content);
 });
 
-//  call that returns the file
+//  call that returns the whole JSON file
 app.get("/api/:documentid", (req, res) => {
   let content = fs.existsSync(`./data/${req.params.documentid}.json`)
     ? JSON.parse(
@@ -58,12 +54,11 @@ app.get("/api/:documentid", (req, res) => {
     : {};
   res.json(content);
 });
-app.put("/api/:documentid", (req, res) => {
+//  rewrites the whole file with the request
+app.put("/api/:documentid/reset", (req, res) => {
+  const filePath = `./data/${req.params.documentid}.json`;
   let content = req.body;
-  fs.writeFileSync(
-    `./data/${req.params.documentid}.json`,
-    JSON.stringify(content)
-  );
+  fs.writeFileSync(filePath, JSON.stringify(content), "utf8");
   res.json(content);
 });
 

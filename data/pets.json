@@ -200,13 +200,13 @@
     "description": "bill is a playful and affectionate bullfrog who enjoys being around people."
   },
   {
-    "name": "blue",
-    "type": "cat",
-    "breed": "no clue",
-    "sex": "Female",
-    "color": "grey",
+    "name": "Raider",
+    "type": "Dog",
+    "breed": "Lab",
+    "sex": "Male",
+    "color": "Black",
     "spayed": "Yes",
-    "age": 1,
-    "description": "She is actually the meanest cat I've ever owned"
+    "age": 4,
+    "description": "Does not stop barking."
   }
 ]
