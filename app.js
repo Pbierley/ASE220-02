@@ -17,6 +17,7 @@ app.get("/detail", (req, res) => {
 });
 
 /* API ENDPOINTS */
+//  creates a new file with timestamp as the file name
 app.post("/api", (req, res) => {
   let filename = new Date().toISOString().replace(/[^a-zA-Z0-9]/g, "");
   let content = req.body;
@@ -25,6 +26,28 @@ app.post("/api", (req, res) => {
   res.setHeader("filename", filename);
   res.json(content);
 });
+//  create a method to append the new pet to the bottom of the json file
+app.put("/api/:documentid", (req, res) => {
+  //  creates file path
+  const filePath = `./data/${req.params.documentid}.json`;
+  //  creates new pet object
+  let newPet = req.body;
+  //  initiates petList
+  let petList = [];
+  //  fills pet list
+  if (fs.existsSync(filePath)) {
+    petList = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  }
+  //  adds new pet
+  petList.push(newPet);
+  //  writes to file
+  fs.writeFileSync(filePath, JSON.stringify(petList), "utf8");
+  //  creates content and sets it to new written file
+  let content = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  // res.setHeader("filename", filename);
+  res.json(content);
+});
+//  call that returns the file
 app.get("/api/:documentid", (req, res) => {
   let content = fs.existsSync(`./data/${req.params.documentid}.json`)
     ? JSON.parse(
@@ -41,6 +64,20 @@ app.put("/api/:documentid", (req, res) => {
   );
   res.json(content);
 });
+//  create a call to delete a chosen pet
+app.delete("/api/:documentid", (req, res) => {
+  //  create file path
+  const filePath = `./data/${req.params.documentid}.json`;
+  const petToBeRemoved = req.body.name;
+  let pets = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  //  check if it exists
+  //  if it does exist then remove the chosen pet using pet object
+
+  pets = pets.filter((pet) => pet.name !== petToBeRemoved);
+  fs.writeFileSync(filePath, JSON.stringify(pets), "utf8");
+  res.json({ message: `Removed pet named "${petToBeRemoved}".` });
+});
+//  deletes all the pets
 app.delete("/api/:documentid", (req, res) => {
   if (fs.existsSync(`./data/${req.params.documentid}.json`))
     fs.unlinkSync("./data.json");

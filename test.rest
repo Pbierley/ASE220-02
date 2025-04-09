@@ -4,15 +4,15 @@ GET http://127.0.0.1:3000
 
 
 ### HTML API DOCUMENTATION: This can be a different page
-GET http://127.0.0.1:3000/detail
+GET http://127.0.0.1:3000
 
 
 ### API ENDPOINTS
 ### Create a document
-POST http://127.0.0.1:3000/api
+POST http://127.0.0.1:3000/api/pets
 Content-type: application/json
 
-{"newPetExample": "scruffles"}
+
 
 ### Retrieve a document
 GET http://127.0.0.1:3000/api/pets
@@ -22,7 +22,28 @@ Content-type: application/json
 PUT http://127.0.0.1:3000/api/pets
 Content-type: application/json
 
-{"change":"the content"}
+{
+    "name": "blue",
+    "type": "cat",
+    "breed": "no clue",
+    "sex": "Female",
+    "color": "grey",
+    "spayed": "Yes",
+    "age": 1,
+    "description": "She is actually the meanest cat I've ever owned"
+  }
 
 ### Delete the content of the document
-DELETE http://127.0.0.1:3000/api/20250403T143342583Z
+DELETE http://127.0.0.1:3000/api/pets
+Content-type: application/json
+
+ {
+    "name": "blue",
+    "type": "cat",
+    "breed": "no clue",
+    "sex": "Female",
+    "color": "grey",
+    "spayed": "Yes",
+    "age": 1,
+    "description": "She is actually the meanest cat I've ever owned"
+  }

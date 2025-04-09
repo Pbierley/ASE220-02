@@ -300,11 +300,12 @@
         let modal = new bootstrap.Modal(document.getElementById("petModal"));
         modal.show();
 
+        //  responsible for removing the color when looking at different pets with different genders
         modal._element.addEventListener("hidden.bs.modal", function () {
           modalContent.classList.remove("modal-male-bg", "modal-female-bg");
         });
       }
-
+      //  event listener to show more pets
       document
         .getElementById("show-more-btn")
         .addEventListener("click", function () {
@@ -312,12 +313,12 @@
         });
 
       document.addEventListener("DOMContentLoaded", fetchPets);
-
+      //  event listener for adding pets
       document
         .getElementById("addPetForm")
         .addEventListener("submit", async function (event) {
           event.preventDefault();
-
+          //  new pet object
           const newPet = {
             name: document.getElementById("petName").value,
             type: document.getElementById("petType").value,
