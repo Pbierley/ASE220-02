@@ -26,6 +26,7 @@ app.post("/api", (req, res) => {
   res.setHeader("filename", filename);
   res.json(content);
 });
+
 //  create a method to append the new pet to the bottom of the json file
 app.put("/api/:documentid", (req, res) => {
   //  creates file path
@@ -47,6 +48,7 @@ app.put("/api/:documentid", (req, res) => {
   // res.setHeader("filename", filename);
   res.json(content);
 });
+
 //  call that returns the file
 app.get("/api/:documentid", (req, res) => {
   let content = fs.existsSync(`./data/${req.params.documentid}.json`)
@@ -64,6 +66,7 @@ app.put("/api/:documentid", (req, res) => {
   );
   res.json(content);
 });
+
 //  create a call to delete a chosen pet
 app.delete("/api/:documentid", (req, res) => {
   //  create file path
@@ -77,7 +80,8 @@ app.delete("/api/:documentid", (req, res) => {
   fs.writeFileSync(filePath, JSON.stringify(pets), "utf8");
   res.json({ message: `Removed pet named "${petToBeRemoved}".` });
 });
-//  deletes all the pets
+
+//  deletes all the pets dont use this unless all hell breaks loose
 app.delete("/api/:documentid", (req, res) => {
   if (fs.existsSync(`./data/${req.params.documentid}.json`))
     fs.unlinkSync("./data.json");

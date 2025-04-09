@@ -41,6 +41,18 @@
         border-radius: 10px;
         cursor: pointer;
       }
+      .remove-pet-btn {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
       .modal-male-bg {
         background-color: #0d6efd !important;
         color: white !important;
@@ -200,6 +212,9 @@
                 <p id="modalDescription"></p>
               </li>
             </ul>
+            <button id="remove-pet-btn" class="remove-pet-btn">
+              Remove Pet From Website
+            </button>
           </div>
         </div>
       </div>
@@ -313,7 +328,7 @@
         });
 
       document.addEventListener("DOMContentLoaded", fetchPets);
-      //  event listener for adding pets
+      //  event listener for adding pets & method that adds a new pet
       document
         .getElementById("addPetForm")
         .addEventListener("submit", async function (event) {
@@ -367,6 +382,41 @@
           } catch (error) {
             console.error("Error sending pet data:", error);
             alert("Error adding pet: " + error.message);
+          }
+        });
+
+      //  Method to remove a pet
+      document
+        .getElementById("remove-pet-btn")
+        .addEventListener("click", async function (event) {
+          //  idk if this is needed but ill keep for now
+          event.preventDefault();
+          //  this grabs the pet from expanded view
+          const Pet = {
+            name: document.getElementById("modalName").textContent,
+            type: document.getElementById("modalType").textContent,
+            breed: document.getElementById("modalBreed").textContent,
+            sex: document.getElementById("modalSex").textContent,
+            spayed: document.getElementById("modalSpayed").textContent,
+            age: parseInt(document.getElementById("modalAge").textContent),
+            description:
+              document.getElementById("modalDescription").textContent,
+          };
+          console.log("pet", Pet);
+          try {
+            const deleteResponse = await fetch(API_URL, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(Pet),
+            });
+            if (deleteResponse.ok) {
+              alert("Pet successfully removed");
+            }
+          } catch (error) {
+            console.error("Error deleting pet data:", error);
+            alert("Error deleting pet: " + error.message);
           }
         });
     </script>
