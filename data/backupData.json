@@ -1,0 +1,212 @@
+[
+  {
+    "name": "Buddy",
+    "type": "Doggo",
+    "breed": "Golden Retriever",
+    "sex": "Male",
+    "color": "Golden",
+    "spayed": "Yes",
+    "age": 4,
+    "description": "Golden Retrievers are friendly, intelligent, and eager to please, making them great family pets."
+  },
+  {
+    "name": "Whiskers",
+    "type": "Cat",
+    "breed": "Tabby",
+    "sex": "Male",
+    "color": "Orange with white paws",
+    "spayed": "Yes",
+    "age": 1,
+    "description": "Whiskers is a playful and affectionate tabby cat who enjoys being around people."
+  },
+  {
+    "name": "Luna",
+    "type": "Dog",
+    "breed": "Siberian Husky",
+    "sex": "Female",
+    "color": "Black & White",
+    "spayed": "Yes",
+    "age": 2,
+    "description": "Siberian Huskies are energetic and playful dogs known for their striking blue eyes."
+  },
+  {
+    "name": "Daisy",
+    "type": "Rabbit",
+    "breed": "Holland Lop",
+    "sex": "Female",
+    "color": "White with brown spots",
+    "spayed": "No",
+    "age": 8,
+    "description": "Daisy is a sweet and playful Holland Lop rabbit who enjoys hopping around."
+  },
+  {
+    "name": "Max",
+    "type": "Dog",
+    "breed": "Beagle",
+    "sex": "Male",
+    "color": "Tri-color",
+    "spayed": "Yes",
+    "age": 5,
+    "description": "Max is an adventurous beagle, always sniffing around and exploring."
+  },
+  {
+    "name": "Mittens",
+    "type": "Cat",
+    "breed": "Siamese",
+    "sex": "Female",
+    "color": "Cream with brown points",
+    "spayed": "Yes",
+    "age": 3,
+    "description": "Mittens is a vocal and affectionate Siamese cat with striking blue eyes."
+  },
+  {
+    "name": "Charlie",
+    "type": "Dog",
+    "breed": "Poodle",
+    "sex": "Male",
+    "color": "White",
+    "spayed": "Yes",
+    "age": 3,
+    "description": "Charlie is a playful and intelligent poodle with a fluffy coat."
+  },
+  {
+    "name": "Shadow",
+    "type": "Cat",
+    "breed": "British Shorthair",
+    "sex": "Male",
+    "color": "Grey",
+    "spayed": "Yes",
+    "age": 4,
+    "description": "Shadow is a calm and gentle British Shorthair, perfect for cuddles."
+  },
+  {
+    "name": "Cleo",
+    "type": "Cat",
+    "breed": "Egyptian Mau",
+    "sex": "Female",
+    "color": "Silver with spots",
+    "spayed": "Yes",
+    "age": 2,
+    "description": "Cleo is a playful and graceful Egyptian Mau, known for her spots and energy."
+  },
+  {
+    "name": "Rocky",
+    "type": "Dog",
+    "breed": "Rottweiler",
+    "sex": "Male",
+    "color": "Black & Tan",
+    "spayed": "Yes",
+    "age": 4,
+    "description": "Rocky is a strong, protective, and loyal Rottweiler."
+  },
+  {
+    "name": "Toby",
+    "type": "Dog",
+    "breed": "Beagle",
+    "sex": "Male",
+    "color": "Lemon",
+    "spayed": "Yes",
+    "age": 7,
+    "description": "Toby is a friendly and curious beagle, always sniffing around for treats."
+  },
+  {
+    "name": "Simba",
+    "type": "Cat",
+    "breed": "Maine Coon",
+    "sex": "Male",
+    "color": "Brown tabby",
+    "spayed": "Yes",
+    "age": 5,
+    "description": "Simba is a large, friendly Maine Coon, known for his playfulness and intelligence."
+  },
+  {
+    "name": "Lily",
+    "type": "Dog",
+    "breed": "Chihuahua",
+    "sex": "Female",
+    "color": "Fawn",
+    "spayed": "Yes",
+    "age": 2,
+    "description": "Lily is a small, energetic Chihuahua with a big personality."
+  },
+  {
+    "name": "Gizmo",
+    "type": "Dog",
+    "breed": "Shih Tzu",
+    "sex": "Male",
+    "color": "Black & White",
+    "spayed": "Yes",
+    "age": 3,
+    "description": "Gizmo is a sweet and affectionate Shih Tzu with a fluffy coat."
+  },
+  {
+    "name": "Jasmine",
+    "type": "Cat",
+    "breed": "Persian",
+    "sex": "Female",
+    "color": "White",
+    "spayed": "Yes",
+    "age": 4,
+    "description": "Jasmine is a calm and affectionate Persian cat with long, silky fur."
+  },
+  {
+    "name": "Milo",
+    "type": "Dog",
+    "breed": "Cocker Spaniel",
+    "sex": "Male",
+    "color": "Black",
+    "spayed": "Yes",
+    "age": 4,
+    "description": "Milo is an affectionate Cocker Spaniel who loves to cuddle and play."
+  },
+  {
+    "name": "Oliver",
+    "type": "Cat",
+    "breed": "American Shorthair",
+    "sex": "Male",
+    "color": "Grey",
+    "spayed": "Yes",
+    "age": 3,
+    "description": "Oliver is an easygoing and friendly American Shorthair with a playful side."
+  },
+  {
+    "name": "Zoe",
+    "type": "Dog",
+    "breed": "Dachshund",
+    "sex": "Female",
+    "color": "Red",
+    "spayed": "Yes",
+    "age": 6,
+    "description": "Zoe is a curious and brave Dachshund who loves to dig and explore."
+  },
+  {
+    "name": "bandit",
+    "type": "shi-poo",
+    "breed": "mutt pretty much",
+    "sex": "Male",
+    "color": "oreo",
+    "spayed": "Yes",
+    "age": 4,
+    "description": "hes spoiled"
+  },
+  {
+    "name": "bill",
+    "type": "bullfrog",
+    "breed": "alaskan",
+    "sex": "male",
+    "color": "Orange with white paws",
+    "spayed": "Yes",
+    "age": 67,
+    "description": "bill is a playful and affectionate bullfrog who enjoys being around people."
+  },
+  {
+    "name": "Raider",
+    "type": "Dog",
+    "breed": "Lab",
+    "sex": "Male",
+    "color": "Black",
+    "spayed": "Yes",
+    "age": 4,
+    "description": "Does not stop barking."
+  }
+]

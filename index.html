@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Listings</title>
+
+    <!-- Bootstrap CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+
+    <style>
+      .pet-card {
+        padding: 15px;
+        border-radius: 10px;
+        /* box-shadow: 2px 20px 100px rgba(0, 0, 0, 0.1); */
+        /* color: white; */
+        cursor: pointer;
+
+        transition: transform 0.2s;
+      }
+      .pet-card:hover {
+        transform: scale(1.05);
+      }
+      .pet-card img {
+        width: 100%;
+        border-radius: 5px;
+      }
+      .show-more-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .remove-pet-btn {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .modal-male-bg {
+        background-color: #0d6efd !important;
+        color: white !important;
+      }
+      .modal-female-bg {
+        background-color: #ff69b4 !important;
+        /* color: white !important; */
+      }
+      .bg-female {
+        background-color: #ff69b4 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-light bg-light shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#">🐶 Pet Shelter</a>
+        <button
+          class="btn btn-primary"
+          id="addPetBtn"
+          data-bs-toggle="modal"
+          data-bs-target="#addPetModal"
+        >
+          Add Pet
+        </button>
+      </div>
+    </nav>
+
+    <h1 class="text-center my-4">Available Pets</h1>
+
+    <!-- Container used in the js -->
+    <div class="container">
+      <div id="pet-container" class="row g-4"></div>
+    </div>
+
+    <button id="show-more-btn" class="show-more-btn">Show More</button>
+
+    <!-- Bootstrap Modal for Adding Pet -->
+    <div class="modal fade" id="addPetModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Add New Pet</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="addPetForm">
+              <div class="mb-3">
+                <label for="petName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="petName" required />
+              </div>
+              <div class="mb-3">
+                <label for="petType" class="form-label">Type</label>
+                <input type="text" class="form-control" id="petType" required />
+              </div>
+              <div class="mb-3">
+                <label for="petBreed" class="form-label">Breed</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="petBreed"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="petSex" class="form-label">Sex</label>
+                <select class="form-select" id="petSex" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="petColor" class="form-label">Color</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="petColor"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="petSpayed" class="form-label"
+                  >Spayed/Neutered</label
+                >
+                <select class="form-select" id="petSpayed" required>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="petAge" class="form-label">Age</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="petAge"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="petDescription" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  id="petDescription"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Modal for Expanded View -->
+    <div class="modal fade" id="petModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Pet Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <img
+              id="modalImage"
+              src=""
+              alt=""
+              class="img-fluid rounded mb-3"
+              style="max-width: 300px"
+            />
+            <ul class="list-unstyled">
+              <li><strong>Name:</strong> <span id="modalName"></span></li>
+              <li><strong>Type:</strong> <span id="modalType"></span></li>
+              <li><strong>Breed:</strong> <span id="modalBreed"></span></li>
+              <li><strong>Sex:</strong> <span id="modalSex"></span></li>
+              <li><strong>Color:</strong> <span id="modalColor"></span></li>
+              <li>
+                <strong>Spayed / Neutered:</strong>
+                <span id="modalSpayed"></span>
+              </li>
+              <li><strong>Age:</strong> <span id="modalAge"></span> Years</li>
+              <li>
+                <strong>Description:</strong>
+                <p id="modalDescription"></p>
+              </li>
+            </ul>
+            <button id="remove-pet-btn" class="remove-pet-btn">
+              Remove Pet From Website
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Constants
+      let pets = [];
+      let petsDisplayed = 0;
+      const petsPerLoad = 9;
+      const API_URL = "http://127.0.0.1:3000/api/pets";
+      //  function that pulls the data from node js
+      async function fetchPets() {
+        try {
+          const response = await fetch(API_URL);
+          console.log(response);
+          const text = await response.text();
+          console.log(text);
+          pets = JSON.parse(text);
+          buildPetCard(0);
+        } catch (error) {
+          console.error("Error fetching pets:", error);
+        }
+      }
+      //  function that builds the pet card with html from the data from json data
+      function buildPetCard(startIndex) {
+        let container = document.getElementById("pet-container");
+
+        for (
+          let i = startIndex;
+          i < Math.min(startIndex + petsPerLoad, pets.length);
+          i++
+        ) {
+          let pet = pets[i];
+          let colorClass = pet.sex === "Male" ? "bg-primary" : "bg-female";
+
+          let col = document.createElement("div");
+          col.className = "col-12 col-md-4";
+
+          //  make change to this to make the color pink for females
+          col.innerHTML = `
+                    <div class="pet-card ${colorClass} text-white p-3" onclick="showPetDetails(${i})">
+                        <img src="photos/${pet.name}.jpg" alt="${pet.name}" onerror="this.onerror=null; this.src='photos/NAN.jpg';">
+                        <ul class="list-unstyled mt-2">
+                            <li><strong>Type:</strong> ${pet.type}</li>
+                            <li><strong>Breed:</strong> ${pet.breed}</li>
+                            <li><strong>Sex:</strong> ${pet.sex}</li>
+                            <li><strong>Name:</strong> ${pet.name}</li>
+                        </ul>
+                    </div>
+                `;
+
+          container.appendChild(col);
+        }
+        //  check to make sure that it only allows users to click show more if theres actually more pets to view
+        petsDisplayed += petsPerLoad;
+        if (petsDisplayed >= pets.length) {
+          document.getElementById("show-more-btn").style.display = "none";
+        } else {
+          document.getElementById("show-more-btn").style.display = "block";
+        }
+      }
+
+      function showPetDetails(index) {
+        let pet = pets[index];
+
+        document.getElementById("modalTitle").textContent = pet.name;
+        fetch(`photos/${pet.name}.jpg`)
+          .then(
+            (res) =>
+              (document.getElementById("modalImage").src = res.ok
+                ? `photos/${pet.name}.jpg`
+                : "photos/Nan.jpg")
+          )
+          .catch(
+            () => (document.getElementById("modalImage").src = "photos/Nan.jpg")
+          );
+        //  sets all the data to display the pet view
+        document.getElementById("modalName").textContent = pet.name;
+        document.getElementById("modalType").textContent = pet.type;
+        document.getElementById("modalBreed").textContent = pet.breed;
+        document.getElementById("modalSex").textContent = pet.sex;
+        document.getElementById("modalColor").textContent = pet.color;
+        document.getElementById("modalSpayed").textContent = pet.spayed;
+        document.getElementById("modalAge").textContent = pet.age;
+        document.getElementById("modalDescription").textContent =
+          pet.description;
+
+        const modalContent = document.querySelector("#petModal .modal-content");
+        // modalContent.classList.remove("modal-male-bg", "modal-female-bg");
+        //  sets the color of the background according to gender
+        modalContent.classList.add(
+          pet.sex === "Male" ? "modal-male-bg" : "modal-female-bg"
+        );
+
+        let modal = new bootstrap.Modal(document.getElementById("petModal"));
+        modal.show();
+
+        //  responsible for removing the color when looking at different pets with different genders
+        modal._element.addEventListener("hidden.bs.modal", function () {
+          modalContent.classList.remove("modal-male-bg", "modal-female-bg");
+        });
+      }
+      //  event listener to show more pets
+      document
+        .getElementById("show-more-btn")
+        .addEventListener("click", function () {
+          buildPetCard(petsDisplayed);
+        });
+
+      document.addEventListener("DOMContentLoaded", fetchPets);
+      //  event listener for adding pets & method that adds a new pet
+      document
+        .getElementById("addPetForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+          //  new pet object
+          const newPet = {
+            name: document.getElementById("petName").value,
+            type: document.getElementById("petType").value,
+            breed: document.getElementById("petBreed").value,
+            sex: document.getElementById("petSex").value,
+            color: document.getElementById("petColor").value,
+            spayed: document.getElementById("petSpayed").value,
+            age: parseInt(document.getElementById("petAge").value),
+            description: document.getElementById("petDescription").value,
+          };
+
+          try {
+            // First, fetch the current list of pets
+            const getResponse = await fetch(API_URL);
+            const currentPets = await getResponse.json();
+
+            // Ensure currentPets is an array (in case the API returns a single object initially)
+            //  FIX THIS
+            const petsArray = Array.isArray(currentPets)
+              ? currentPets
+              : [currentPets];
+
+            // Add the new pet to the array
+            //  petsArray.push(newPet);
+
+            // Send the updated array back to the API
+            const putResponse = await fetch(API_URL, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(newPet),
+            });
+
+            if (putResponse.ok) {
+              alert("Pet added successfully!");
+              // Update local pets array and display the new pet
+              pets = petsArray;
+              if (petsDisplayed < pets.length) {
+                buildPetCard(pets.length - 1); // Display just the new pet
+              }
+              document.getElementById("addPetForm").reset();
+              document.querySelector("#addPetModal .btn-close").click();
+            } else {
+              alert("Error adding pet.");
+            }
+          } catch (error) {
+            console.error("Error sending pet data:", error);
+            alert("Error adding pet: " + error.message);
+          }
+        });
+
+      //  Method to remove a pet
+      document
+        .getElementById("remove-pet-btn")
+        .addEventListener("click", async function (event) {
+          //  idk if this is needed but ill keep for now
+          event.preventDefault();
+          //  this grabs the pet from expanded view
+          const Pet = {
+            name: document.getElementById("modalName").textContent,
+            type: document.getElementById("modalType").textContent,
+            breed: document.getElementById("modalBreed").textContent,
+            sex: document.getElementById("modalSex").textContent,
+            spayed: document.getElementById("modalSpayed").textContent,
+            age: parseInt(document.getElementById("modalAge").textContent),
+            description:
+              document.getElementById("modalDescription").textContent,
+          };
+          console.log("pet", Pet);
+          try {
+            const deleteResponse = await fetch(API_URL, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(Pet),
+            });
+            if (deleteResponse.ok) {
+              alert("Pet successfully removed");
+            }
+          } catch (error) {
+            console.error("Error deleting pet data:", error);
+            alert("Error deleting pet: " + error.message);
+          }
+        });
+    </script>
+  </body>
+</html>
